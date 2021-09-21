@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <title>CADViewer - Conversion Server Test</title>
+    <link rel="icon" href="https://cadviewer.com/images/cvlogo.png">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="TMS" />
+    <meta name="created" content="Tue, 09 Mar 2021 01:14:30 GMT" />
+    <meta name="description" content="Tailor Made Software  - CADViewer Online Sample Implementation Page - Space Icon Objcts" />
+    <meta name="keywords" content="" />
+
+	<script src="./jquery-2.2.3.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+
+
+// THIS IS THE URL TO THE ENDPOINT IMPLEMENTING CONVERTER AND DATA EXTRACTOR
+
+// cadviewer-conversion-server   nodejs implementation
+var tms_rest_api_url_pw1 = "http://localhost:3000/callapiconversion";
+
+
+// CADViewer php script implementation - local server
+var tms_rest_api_url_pw2 = "http://localhost/cadviewer_6_4/php/call-Api_Conversion.php";
+
+
+// CADViewer php script implementation - CADViewer online demo
+var tms_rest_api_url_pw3 = "https://onlinedemo.cadviewer.com/cadviewer_6_5/php/call-Api_Conversion.php";
+
+
+
+// DATA EXTRACTION OBJECT
+var conv_extr_request1 = new Object();
+	conv_extr_request1.action    = "data_extraction";
+	conv_extr_request1.converter    = "LinkList 2020";
+	conv_extr_request1.version    = "V2.00";
+	conv_extr_request1.contentType    = "file";
+	conv_extr_request1.contentResponse = "stream";
+	conv_extr_request1.contentFormat = "DWG";
+	conv_extr_request1.contentUsername = "";
+	conv_extr_request1.contentPassword = "";
+	conv_extr_request1.userLabel = "fromMyApp";
+	conv_extr_request1.leaveStreamOnServer = 0;
+
+	conv_extr_request1.contentLocation   = "https://onlinedemo.cadviewer.com/cadviewer_6_5/content%2Fdrawings%2Fdwg%2F1st floor plan.dwg";
+	conv_extr_request1.parameters   =  [{"paramName":"json","paramValue":""},{"paramName":"all","paramValue":""}];
+	
+
+// DATA CONVERSION OBJECT
+var conv_extr_request2 = new Object();
+	conv_extr_request2.action    = "svg_creation";
+	conv_extr_request2.converter    = "AutoXchange AX2022";
+	conv_extr_request2.version    = "V2.00";
+	conv_extr_request2.contentType    = "file";
+	conv_extr_request2.contentResponse = "stream";
+	conv_extr_request2.contentFormat = "DWG";
+	conv_extr_request2.contentUsername = "";
+	conv_extr_request2.contentPassword = "";
+	conv_extr_request2.userLabel = "fromMyApp";
+	conv_extr_request2.leaveStreamOnServer = 0;
+	conv_extr_request2.contentLocation   = "https://onlinedemo.cadviewer.com/cadviewer_6_5/content%2Fdrawings%2Fdwg%2F1st floor plan.dwg";
+	conv_extr_request2.parameters   =[{"paramName":"f","paramValue":"svg"},{"paramName":"model","paramValue":""}, {"paramName":"hlall","paramValue":""}, {"paramName":"fpath","paramValue":"c:/cadviewer-conversion-server/converters/ax2020/windows/fonts"}];
+
+
+
+
+function call_server_post(data_object, tms_rest_api_url_pw){
+
+	var	api_data = JSON.stringify(data_object);
+	console.log(api_data);
+
+	var filelist_data = {};
+	filelist_data['request'] = api_data;
+								
+	jQuery.ajax({
+		url : tms_rest_api_url_pw,
+		type: 'post',
+		data: filelist_data,
+		success:function(Api_response){
+
+		console.log("SERVER RESPONSE POST: "+Api_response);
+		
+		var conversion_result = JSON.parse(Api_response);
+    
+		console.log("POST 2: "+conversion_result.contentStreamData);
+
+		//window.alert("contentStreamData: "+conversion_result.contentStreamData);
+		// open window with extracted json or svg
+		window.open(conversion_result.contentStreamData);
+		}	
+	});
+
+}
+
+
+
+function call_server_jsonp(data_object, tms_rest_api_url_pw){
+
+	var	api_data = JSON.stringify(data_object);
+	console.log(api_data);
+
+	var url_json = "";
+	url_json = tms_rest_api_url_pw+"?json="+api_data;
+		
+    jQuery.ajax({
+        url : url_json,
+        jsonp: "tms_restful_api",
+        dataType: 'jsonp',
+        async: false,
+        success:function(Api_response){
+
+            console.log("JSONP SERVER RESPONSE: "+Api_response);
+            
+            var conversion_result = JSON.parse(Api_response);
+
+            console.log("JSONP 2: "+conversion_result.contentStreamData);
+
+            //window.alert("contentStreamData: "+conversion_result.contentStreamData);
+            // open window with extracted json or svg
+            
+            window.open(conversion_result.contentStreamData);
+		}	
+	});
+
+}
+
+
+
+
+
+
+</script>	
+
+
+</head>
+  <body bgcolor="white" style="margin:0" >
+
+    <h4><a href="https://cadviewer.com/cadviewertechdocs"><img src="https://cadviewer.com/images/cadviewer/cv-logo.gif" width="120" height="30" alt="Tailor Made logo" /></a>
+        &nbsp;&nbsp;CADViewer Conversion Server:  Data Extraction and CAD Conversion Test.  </b> 
+        <font size="-1"> <strong>
+        Contact <a href="https://cadviewer.com/contact/">Us!</a></strong></font></h4>
+        
+	<table width="100%" height="100%" border="0" cellspacing="0" border-spacing="0" id="mainTable">
+    <tbody>
+	<tr style="background-color:rgb(255,255,255)" height="100px" >
+			<td height="10">
+				<canvas id="dummy" width="10" height="10"></canvas>
+			</td>
+		<td width="40" height="40">
+		</td>
+		<td>
+		<canvas id="dummy" width="10" height="10"></canvas>
+		</td>
+		<td>
+        <font size="-1">
+        1: Two template objects <strong>conv_extr_request1</strong> and <strong>conv_extr_request2</strong> are set up for data extraction and data conversion.
+        <br>
+        <br>
+        2: Two template methods for server call are set up for:<br> 
+            A: Post call to NodeJS server (<strong>call_server_post</strong>). 
+        <br>B: Jsonp post call to PHP server (<strong>call_server_jsonp</strong>).
+        </font>
+        <br>
+        <br>
+        <strong>Samples:</strong>
+        <br>
+        <br>
+        <strong>Local NODEJS server:</strong>
+        <br>
+        <br>
+        <button class="w3-button demo" onClick="call_server_post(conv_extr_request1, tms_rest_api_url_pw1);">NodeJS: Test POST Conversion Server - JSON Data Extraction</button>
+        <br>
+        <button class="w3-button demo" onClick="call_server_post(conv_extr_request2, tms_rest_api_url_pw1);">NodeJS: Test POST Conversion Server - DWG to SVG Conversion</button>
+        <br>
+        <br>
+        <strong>Local PHP server:</strong>
+        <br>
+		<br>
+        <button class="w3-button demo" onClick="call_server_jsonp(conv_extr_request1, tms_rest_api_url_pw2);">PHP: Test JSONP Conversion Server - JSON Data Extraction</button>
+        <br>
+        <button class="w3-button demo" onClick="call_server_jsonp(conv_extr_request2, tms_rest_api_url_pw2);">PHP: Test JSONP Conversion Server - DWG to SVG Conversion</button>
+        <br>
+		<br>
+        <strong>External online PHP server (onlinedemo.cadviewer.com):</strong>
+        <br>
+		<br>
+        <button class="w3-button demo" onClick="call_server_jsonp(conv_extr_request1, tms_rest_api_url_pw3);">PHP: Test JSONP Conversion Server - JSON Data Extraction</button>
+        <br>
+        <button class="w3-button demo" onClick="call_server_jsonp(conv_extr_request2, tms_rest_api_url_pw3);">PHP: Test JSONP Conversion Server - DWG to SVG Conversion</button>
+
+
+
+				
+    </p></td>
+    </tr> 
+</tbody>
+	</table>
+
+
+</body>
+</html>
