@@ -64,6 +64,26 @@ var conv_extr_request2 = new Object();
 
 
 
+// DATA DISPLAY OBJECT
+var conv_extr_request3 = new Object();
+	conv_extr_request3.action    = "cadviewer_display";
+	conv_extr_request3.converter    = "AutoXchange AX2022";
+	conv_extr_request3.version    = "V2.00";
+	conv_extr_request3.contentType    = "file";
+	conv_extr_request3.contentResponse = "stream";
+	conv_extr_request3.contentFormat = "DWG";
+	conv_extr_request3.contentUsername = "";
+	conv_extr_request3.contentPassword = "";
+	conv_extr_request3.userLabel = "fromMyApp";
+	conv_extr_request3.leaveStreamOnServer = 0;
+	conv_extr_request3.contentLocation   = "https://onlinedemo.cadviewer.com/cadviewer_6_5/content%2Fdrawings%2Fdwg%2F1st floor plan.dwg";
+	conv_extr_request3.parameters   =[{"paramName":"f","paramValue":"svg"},{"paramName":"model","paramValue":""}, {"paramName":"hlall","paramValue":""}, {"paramName":"fpath","paramValue":"c:/cadviewer-conversion-server/converters/ax2020/windows/fonts"}];
+
+
+
+
+
+
 
 function call_server_post(data_object, tms_rest_api_url_pw){
 
@@ -154,10 +174,14 @@ function call_server_jsonp(data_object, tms_rest_api_url_pw){
 		</td>
 		<td>
         <font size="-1">
-        1: Two template objects <strong>conv_extr_request1</strong> and <strong>conv_extr_request2</strong> are set up for data extraction and data conversion.
+        1: One template objects <strong>conv_extr_request1</strong> is set up for data extraction.
+		<br>
+        2: One template objects <strong>conv_extr_request2</strong> is set up for data conversion.
+		<br>
+        3: One template objects <strong>conv_extr_request3</strong> is set up for CADViewer display of DWG file.			
         <br>
         <br>
-        2: Two template methods for server call are set up for:<br> 
+        4: Two template methods for server call are set up for:<br> 
             A: Post call to NodeJS server (<strong>call_server_post</strong>). 
         <br>B: Jsonp post call to PHP server (<strong>call_server_jsonp</strong>).
         </font>
@@ -166,15 +190,17 @@ function call_server_jsonp(data_object, tms_rest_api_url_pw){
         <strong>Samples:</strong>
         <br>
         <br>
-        <strong>Local NODEJS server:</strong>
+        <strong>NODEJS server: <a href="https://github.com/CADViewer/cadviewer-conversion-server">cadviewer-conversion-server</a></strong>
         <br>
         <br>
         <button class="w3-button demo" onClick="call_server_post(conv_extr_request1, tms_rest_api_url_pw1);">NodeJS: Test POST Conversion Server - JSON Data Extraction</button>
         <br>
         <button class="w3-button demo" onClick="call_server_post(conv_extr_request2, tms_rest_api_url_pw1);">NodeJS: Test POST Conversion Server - DWG to SVG Conversion</button>
         <br>
+        <button class="w3-button demo" onClick="call_server_post(conv_extr_request3, tms_rest_api_url_pw1);">NodeJS: CADViewer Display of DWG</button>
         <br>
-        <strong>Local PHP server:</strong>
+        <br>
+        <strong>PHP server: <a href="https://github.com/CADViewer/cadviewer-php-scripts">cadviewer-php-scripts</a></strong>, <strong><a href="https://github.com/CADViewer/cadviewer-script-library">cadviewer-script-library</a></strong>
         <br>
 		<br>
         <button class="w3-button demo" onClick="call_server_jsonp(conv_extr_request1, tms_rest_api_url_pw2);">PHP: Test JSONP Conversion Server - JSON Data Extraction</button>
