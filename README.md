@@ -1,5 +1,5 @@
-# CADViewer REST API Conversion Server
- Sample for testing the CADViewer Conversion Server REST API
+# CADViewer RESTFUL API
+ Sample for testing the the CADViewer Conversion Server REST API on various platforms
   
 The TailorMade CADViewer RESTFUL API is a server side infrastructure component that allows you send AutoCAD DWG, DXF and DWF files, MicroStation DGN, Adobe PDF, and other high resolution floorplans in vector formats into a server for processing.
 
