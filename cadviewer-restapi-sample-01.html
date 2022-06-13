@@ -33,8 +33,8 @@ var tms_rest_api_url_pw3 = "https://onlinedemo.cadviewer.com/cadviewer_6_5/php/c
 // DATA EXTRACTION OBJECT
 var conv_extr_request1 = new Object();
 	conv_extr_request1.action    = "data_extraction";
-	conv_extr_request1.converter    = "LinkList 2020";
-	conv_extr_request1.version    = "V2.00";
+	conv_extr_request1.converter    = "LinkList 2023";
+	conv_extr_request1.version    = "V23.00";
 	conv_extr_request1.contentType    = "file";
 	conv_extr_request1.contentResponse = "stream";
 	conv_extr_request1.contentFormat = "DWG";
@@ -50,8 +50,8 @@ var conv_extr_request1 = new Object();
 // DATA CONVERSION OBJECT
 var conv_extr_request2 = new Object();
 	conv_extr_request2.action    = "svg_creation";
-	conv_extr_request2.converter    = "AutoXchange AX2022";
-	conv_extr_request2.version    = "V2.00";
+	conv_extr_request2.converter    = "AutoXchange AX2023";
+	conv_extr_request2.version    = "V23.00";
 	conv_extr_request2.contentType    = "file";
 	conv_extr_request2.contentResponse = "stream";
 	conv_extr_request2.contentFormat = "DWG";
@@ -67,8 +67,8 @@ var conv_extr_request2 = new Object();
 // DATA DISPLAY OBJECT
 var conv_extr_request3 = new Object();
 	conv_extr_request3.action    = "cadviewer_display";
-	conv_extr_request3.converter    = "AutoXchange AX2022";
-	conv_extr_request3.version    = "V2.00";
+	conv_extr_request3.converter    = "AutoXchange AX2023";
+	conv_extr_request3.version    = "V23.00";
 	conv_extr_request3.contentType    = "file";
 	conv_extr_request3.contentResponse = "stream";
 	conv_extr_request3.contentFormat = "DWG";
@@ -80,6 +80,23 @@ var conv_extr_request3 = new Object();
 	conv_extr_request3.parameters   =[{"paramName":"f","paramValue":"svg"},{"paramName":"model","paramValue":""}, {"paramName":"hlall","paramValue":""}, {"paramName":"fpath","paramValue":"c:/cadviewer-conversion-server/converters/ax2020/windows/fonts"}];
 
 
+
+
+// DATA EXTRACTION OBJECT
+var conv_extr_request4 = new Object();
+	conv_extr_request4.action    = "data_extraction";
+	conv_extr_request4.converter    = "LinkList 2023";
+	conv_extr_request4.version    = "V23.00";
+	conv_extr_request4.contentType    = "file";
+	conv_extr_request4.contentResponse = "stream";
+	conv_extr_request4.contentFormat = "DWG";
+	conv_extr_request4.contentUsername = "";
+	conv_extr_request4.contentPassword = "";
+	conv_extr_request4.userLabel = "fromMyApp";
+	conv_extr_request4.leaveStreamOnServer = 0;
+
+	conv_extr_request4.contentLocation   = "http://localhost:3000/content/drawings/dwg/Floorplan-2-Multilevel.dwg"; // Floorplan-2-Multilevel  hq17_.dwg
+	conv_extr_request4.parameters   =  [{"paramName":"splity","paramValue":""}];
 
 
 
@@ -174,14 +191,16 @@ function call_server_jsonp(data_object, tms_rest_api_url_pw){
 		</td>
 		<td>
         <font size="-1">
-        1: One template objects <strong>conv_extr_request1</strong> is set up for data extraction.
+        1: Template objects <strong>conv_extr_request1</strong> is set up for data extraction.
 		<br>
-        2: One template objects <strong>conv_extr_request2</strong> is set up for data conversion.
+        2: Template objects <strong>conv_extr_request2</strong> is set up for data conversion.
 		<br>
-        3: One template objects <strong>conv_extr_request3</strong> is set up for CADViewer display of DWG file.			
+        3: Template objects <strong>conv_extr_request3</strong> is set up for CADViewer display of DWG file.			
+        <br>
+        4: Template objects <strong>conv_extr_request4</strong> is set up for data splitting.			
         <br>
         <br>
-        4: Two template methods for server call are set up for:<br> 
+        5: Two template methods for server call are set up for:<br> 
             A: Post call to NodeJS server (<strong>call_server_post</strong>). 
         <br>B: Jsonp post call to PHP server (<strong>call_server_jsonp</strong>).
         </font>
@@ -198,6 +217,8 @@ function call_server_jsonp(data_object, tms_rest_api_url_pw){
         <button class="w3-button demo" onClick="call_server_post(conv_extr_request2, tms_rest_api_url_pw1);">NodeJS: Test POST Conversion Server - DWG to SVG Conversion</button>
         <br>
         <button class="w3-button demo" onClick="call_server_post(conv_extr_request3, tms_rest_api_url_pw1);">NodeJS: CADViewer Display of DWG</button>
+        <br>
+        <button class="w3-button demo" onClick="call_server_post(conv_extr_request4, tms_rest_api_url_pw1);">NodeJS: Splitting of modelspace DWG file in multiple files</button>
         <br>
         <br>
         <strong>PHP server: <a href="https://github.com/CADViewer/cadviewer-php-scripts">cadviewer-php-scripts</a></strong>, <strong><a href="https://github.com/CADViewer/cadviewer-script-library">cadviewer-script-library</a></strong>
