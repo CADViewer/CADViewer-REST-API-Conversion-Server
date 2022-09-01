@@ -43,8 +43,12 @@ var conv_extr_request1 = new Object();
 	conv_extr_request1.userLabel = "fromMyApp";
 	conv_extr_request1.leaveStreamOnServer = 0;
 
-	conv_extr_request1.contentLocation   = "https://onlinedemo.cadviewer.com/cadviewer_6_5/content%2Fdrawings%2Fdwg%2F1st floor plan.dwg";
-	conv_extr_request1.parameters   =  [{"paramName":"json","paramValue":""},{"paramName":"all","paramValue":""}];
+    conv_extr_request1.contentLocation   = "https://onlinedemo.cadviewer.com/cadviewer_6_5/content%2Fdrawings%2Fdwg%2F1st floor plan.dwg";
+//    conv_extr_request1.contentLocation   = "http://localhost:3000/content/custom/carrier/EdwardsBRAVAL6N_Building 1 Level 2.dwg";
+//    conv_extr_request1.contentLocation   = "http://localhost:3000/content/custom/carrier/EdwardsBRAVAL6N_Building 2 Floor 2_Fixed.dwg";
+	
+    conv_extr_request1.parameters   =  [{"paramName":"json","paramValue":""},{"paramName":"blocks","paramValue":""}];
+//    conv_extr_request1.parameters   =  [{"paramName":"json","paramValue":""},{"paramName":"all","paramValue":""}];
 	
 
 // DATA CONVERSION OBJECT
@@ -95,7 +99,7 @@ var conv_extr_request4 = new Object();
 	conv_extr_request4.userLabel = "fromMyApp";
 	conv_extr_request4.leaveStreamOnServer = 0;
 
-	conv_extr_request4.contentLocation   = "http://localhost:3000/content/drawings/dwg/Floorplan-2-Multilevel.dwg"; // Floorplan-2-Multilevel  hq17_.dwg
+	conv_extr_request4.contentLocation   = "http://localhost:3000/content/custom/carrier/Floorplan-2-Multilevel.dwg"; // Floorplan-2-Multilevel  hq17_.dwg
 	conv_extr_request4.parameters   =  [{"paramName":"splity","paramValue":""}];
 
 
@@ -116,8 +120,74 @@ var conv_extr_request5 = new Object();
 	conv_extr_request5.parameters   =[{"paramName":"f","paramValue":"pdf"},{"paramName":"model","paramValue":""}, {"paramName":"fpath","paramValue":"c:/cadviewer-conversion-server/converters/ax2023/windows/fonts"}];
 
 
+function json_postprocessing(urltojson){
 
 
+console.log("before get: "+urltojson);
+
+// post processing
+jQuery.ajax({
+    url : urltojson,
+    type: 'get',
+    dataType: 'text',
+    async: false,
+    success:function(Api_response){
+
+        console.log("before json stringify:");
+
+        var mystring = JSON.stringify(Api_response)
+        console.log("SERVER json_postprocessing: "+mystring.substring(0,200));
+
+        mystring = mystring.replaceAll("\&", "&");
+
+
+        mystring = JSON.parse(mystring);
+
+        console.log("FULL JSON:"+mystring);
+
+        return (mystring);
+
+    },
+    error:function(data_e){console.log("Error "+JSON.stringify(data_e));    }
+});
+
+}
+
+
+function call_server_post_postprocessing(data_object, tms_rest_api_url_pw){
+
+var	api_data = JSON.stringify(data_object);
+console.log(api_data);
+
+var filelist_data = {};
+filelist_data['request'] = api_data;
+                            
+jQuery.ajax({
+    url : tms_rest_api_url_pw,
+    type: 'post',
+    data: filelist_data,
+    success:function(Api_response){
+
+    console.log("call_server_post_postprocessing: SERVER RESPONSE POST: "+Api_response);
+    
+    var conversion_result = JSON.parse(Api_response);
+
+    console.log("POST 2: "+conversion_result.contentStreamData);
+
+    //json = json_postprocessing(conversion_result.contentStreamData);
+
+    //window.alert("contentStreamData: "+conversion_result.contentStreamData);
+    // open window with extracted json or svg
+
+    //window.open(json);
+
+    window.open(conversion_result.contentStreamData);
+    
+
+    }	
+});
+
+}
 
 
 function call_server_post(data_object, tms_rest_api_url_pw){
@@ -131,12 +201,21 @@ function call_server_post(data_object, tms_rest_api_url_pw){
 	jQuery.ajax({
 		url : tms_rest_api_url_pw,
 		type: 'post',
+        dataType: 'json',
 		data: filelist_data,
 		success:function(Api_response){
 
-		console.log("SERVER RESPONSE POST: "+Api_response);
+		console.log("call_server_post - SERVER RESPONSE POST: "+Api_response);
 		
-		var conversion_result = JSON.parse(Api_response);
+		var conversion_result = ""; // = JSON.parse(Api_response);
+
+        try{
+            conversion_result = JSON.parse(Api_response);
+        }
+        catch(err){
+            console.log("err:"+err);
+            conversion_result = Api_response;
+        }
     
 		console.log("POST 2: "+conversion_result.contentStreamData);
 
