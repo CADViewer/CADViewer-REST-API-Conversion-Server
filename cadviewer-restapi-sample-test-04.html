@@ -21,6 +21,15 @@
 var tms_rest_api_url_pw1 = "http://localhost:3000/callapiconversion";
 
 
+
+// cadviewer-conversion-server  nodejs implementation  CADViewer server
+//var tms_rest_api_url_pw4 = "https://onlinedemo.cadviewer.com:3001/callapiconversion";
+var tms_rest_api_url_pw4 = "https://restapi.cadviewer.com:3000/callapiconversion";
+//var tms_rest_api_url_pw4_base = "https://onlinedemo.cadviewer.com:3001";
+var tms_rest_api_url_pw4_base = "https://restapi.cadviewer.com:3000";
+
+
+
 // CADViewer php script implementation - local server
 var tms_rest_api_url_pw2 = "http://localhost/cadviewer_6_4/php/call-Api_Conversion.php";
 
@@ -48,7 +57,7 @@ var conv_extr_request1 = new Object();
 //    conv_extr_request1.contentLocation   = "http://localhost:3000/content/custom/carrier/EdwardsBRAVAL6N_Building 2 Floor 2_Fixed.dwg";
 	
     conv_extr_request1.parameters   =  [{"paramName":"json","paramValue":""},{"paramName":"blocks","paramValue":""}];
-//    conv_extr_request1.parameters   =  [{"paramName":"json","paramValue":""},{"paramName":"all","paramValue":""}];
+//    conv_extr_request1.parameters   =  [{"paramName":"json","paramValue":""},{"paramName":"text","paramValue":""}];
 	
 
 // DATA CONVERSION OBJECT
@@ -64,7 +73,7 @@ var conv_extr_request2 = new Object();
 	conv_extr_request2.userLabel = "fromMyApp";
 	conv_extr_request2.leaveStreamOnServer = 0;
 	conv_extr_request2.contentLocation   = "https://onlinedemo.cadviewer.com/cadviewer_6_5/content%2Fdrawings%2Fdwg%2F1st floor plan.dwg";
-	conv_extr_request2.parameters   =[{"paramName":"f","paramValue":"svg"},{"paramName":"model","paramValue":""}, {"paramName":"hlall","paramValue":""}, {"paramName":"fpath","paramValue":"c:/cadviewer-conversion-server/converters/ax2023/windows/fonts"}];
+	conv_extr_request2.parameters   =[{"paramName":"f","paramValue":"svg"},{"paramName":"model","paramValue":""}, {"paramName":"hlall","paramValue":""}];
 
 
 
@@ -81,7 +90,7 @@ var conv_extr_request3 = new Object();
 	conv_extr_request3.userLabel = "fromMyApp";
 	conv_extr_request3.leaveStreamOnServer = 0;
 	conv_extr_request3.contentLocation   = "https://onlinedemo.cadviewer.com/cadviewer_6_5/content%2Fdrawings%2Fdwg%2F1st floor plan.dwg";
-	conv_extr_request3.parameters   =[{"paramName":"f","paramValue":"svg"},{"paramName":"model","paramValue":""}, {"paramName":"hlall","paramValue":""}, {"paramName":"fpath","paramValue":"c:/cadviewer-conversion-server/converters/ax2023/windows/fonts"}];
+	conv_extr_request3.parameters   =[{"paramName":"f","paramValue":"svg"},{"paramName":"model","paramValue":""}, {"paramName":"hlall","paramValue":""}];
 
 
 
@@ -117,7 +126,88 @@ var conv_extr_request5 = new Object();
 	conv_extr_request5.userLabel = "fromMyApp";
 	conv_extr_request5.leaveStreamOnServer = 0;
 	conv_extr_request5.contentLocation   = "https://onlinedemo.cadviewer.com/cadviewer_6_5/content%2Fdrawings%2Fdwg%2F1st floor plan.dwg";
-	conv_extr_request5.parameters   =[{"paramName":"f","paramValue":"pdf"},{"paramName":"model","paramValue":""}, {"paramName":"fpath","paramValue":"c:/cadviewer-conversion-server/converters/ax2023/windows/fonts"}];
+	conv_extr_request5.parameters   =[{"paramName":"f","paramValue":"pdf"},{"paramName":"model","paramValue":""}];
+
+
+
+
+
+// CADVIEWER CONVERSION SERVER    
+
+
+
+// DATA DISPLAY OBJECT
+var conv_extr_request6 = new Object();
+	conv_extr_request6.action    = "cadviewer_display";
+	conv_extr_request6.converter    = "AutoXchange AX2024";
+	conv_extr_request6.version    = "V23.00";
+	conv_extr_request6.contentType    = "file";
+	conv_extr_request6.contentResponse = "stream";
+	conv_extr_request6.contentFormat = "DWG";
+	conv_extr_request6.contentUsername = "";
+	conv_extr_request6.contentPassword = "";
+	conv_extr_request6.userLabel = "fromMyApp";
+	conv_extr_request6.leaveStreamOnServer = 0;
+	conv_extr_request6.contentLocation   = tms_rest_api_url_pw4_base + "/content/drawings/dwg/hq17.dwg";
+	conv_extr_request6.parameters   =[{"paramName":"f","paramValue":"svg"},{"paramName":"last","paramValue":""}];
+
+
+
+// DATA CONVERSION OBJECT
+var conv_extr_request7 = new Object();
+	conv_extr_request7.action    = "svg_creation";
+	conv_extr_request7.converter    = "AutoXchange AX2023";
+	conv_extr_request7.version    = "V24.00";
+	conv_extr_request7.contentType    = "file";
+	conv_extr_request7.contentResponse = "stream";
+	conv_extr_request7.contentFormat = "DWG";
+	conv_extr_request7.contentUsername = "";
+	conv_extr_request7.contentPassword = "";
+	conv_extr_request7.userLabel = "fromMyApp";
+	conv_extr_request7.leaveStreamOnServer = 0;
+	conv_extr_request7.contentLocation   = tms_rest_api_url_pw4_base + "/content/drawings/dwg/hq17.dwg";
+	conv_extr_request7.parameters   =[{"paramName":"f","paramValue":"svg"},{"paramName":"last","paramValue":""}];
+
+
+// DATA CONVERSION OBJECT
+var conv_extr_request8 = new Object();
+	conv_extr_request8.action    = "svg_creation";
+	conv_extr_request8.converter    = "AutoXchange AX2024";
+	conv_extr_request8.version    = "V24.00";
+	conv_extr_request8.contentType    = "file";
+	conv_extr_request8.contentResponse = "stream";
+	conv_extr_request8.contentFormat = "DWG";
+	conv_extr_request8.contentUsername = "";
+	conv_extr_request8.contentPassword = "";
+	conv_extr_request8.userLabel = "fromMyApp";
+	conv_extr_request8.leaveStreamOnServer = 0;
+	conv_extr_request8.contentLocation   = tms_rest_api_url_pw4_base + "/content/drawings/dwg/hq17.dwg";
+	conv_extr_request8.parameters   =[{"paramName":"f","paramValue":"pdf"},{"paramName":"last","paramValue":""}, {"paramName":"trace","paramValue":""}];
+
+
+
+// DATA EXTRACTION OBJECT
+var conv_extr_request9 = new Object();
+	conv_extr_request9.action    = "data_extraction";
+	conv_extr_request9.converter    = "LinkList 2023";
+	conv_extr_request9.version    = "V23.00";
+	conv_extr_request9.contentType    = "file";
+	conv_extr_request9.contentResponse = "stream";
+	conv_extr_request9.contentFormat = "DWG";
+	conv_extr_request9.contentUsername = "";
+	conv_extr_request9.contentPassword = "";
+	conv_extr_request9.userLabel = "fromMyApp";
+	conv_extr_request9.leaveStreamOnServer = 0;
+    conv_extr_request9.contentLocation   = tms_rest_api_url_pw4_base + "/content/drawings/dwg/hq17.dwg";
+    conv_extr_request9.parameters   =  [{"paramName":"json","paramValue":""},{"paramName":"blocks","paramValue":""}];
+
+
+
+
+
+
+
+
 
 
 function json_postprocessing(urltojson){
@@ -139,7 +229,6 @@ jQuery.ajax({
         console.log("SERVER json_postprocessing: "+mystring.substring(0,200));
 
         mystring = mystring.replaceAll("\&", "&");
-
 
         mystring = JSON.parse(mystring);
 
@@ -205,7 +294,7 @@ function call_server_post(data_object, tms_rest_api_url_pw){
 		data: filelist_data,
 		success:function(Api_response){
 
-		console.log("call_server_post - SERVER RESPONSE POST: "+Api_response);
+		console.log("call_server_post - SERVER RESPONSE POST: "+JSON.stringify(Api_response));
 		
 		var conversion_result = ""; // = JSON.parse(Api_response);
 
@@ -213,15 +302,23 @@ function call_server_post(data_object, tms_rest_api_url_pw){
             conversion_result = JSON.parse(Api_response);
         }
         catch(err){
-            console.log("err:"+err);
+            console.log("Do not parse, so this is JSON:("+err+")");
             conversion_result = Api_response;
         }
-    
-		console.log("POST 2: "+conversion_result.contentStreamData);
+        
+        var RESTcontent = conversion_result.contentStreamData;
+
+        // 9.46.3      remove garbage
+        RESTcontent = RESTcontent.replaceAll("//", "/");
+        RESTcontent = RESTcontent.replaceAll(":/", "://");
+
+		console.log("call_server_post: "+RESTcontent);
+
+        // Post Processing the return data
 
 		//window.alert("contentStreamData: "+conversion_result.contentStreamData);
 		// open window with extracted json or svg
-		window.open(conversion_result.contentStreamData);
+		window.open(RESTcontent);
 		}	
 	});
 
@@ -336,6 +433,22 @@ function call_server_jsonp(data_object, tms_rest_api_url_pw){
         <button class="w3-button demo" onClick="call_server_jsonp(conv_extr_request1, tms_rest_api_url_pw3);">PHP: Test JSONP Conversion Server - JSON Data Extraction</button>
         <br>
         <button class="w3-button demo" onClick="call_server_jsonp(conv_extr_request2, tms_rest_api_url_pw3);">PHP: Test JSONP Conversion Server - DWG to SVG Conversion</button>
+        <br>
+        <br>
+        <strong>NODEJS server -restapi.cadviewer.com: <a href="https://github.com/CADViewer/cadviewer-conversion-server">cadviewer-conversion-server</a></strong>
+        <br>
+        <br>
+        <button class="w3-button demo" onClick="call_server_post(conv_extr_request9, tms_rest_api_url_pw4);">NodeJS: Test POST Conversion Server - JSON Data Extraction</button>
+        <br>
+        <button class="w3-button demo" onClick="call_server_post(conv_extr_request7, tms_rest_api_url_pw4);">NodeJS: Test POST Conversion Server - DWG to SVG Conversion</button>
+        <br>
+        <button class="w3-button demo" onClick="call_server_post(conv_extr_request8, tms_rest_api_url_pw4);">NodeJS: Test POST Conversion Server - DWG to PDF Conversion</button>
+        <br>
+        <button class="w3-button demo" onClick="call_server_post(conv_extr_request6, tms_rest_api_url_pw4);">NodeJS: CADViewer Display of DWG</button>
+        <br>
+        <button class="w3-button demo" onClick="call_server_post(conv_extr_request4, tms_rest_api_url_pw4);">NodeJS: Splitting of modelspace DWG file in multiple files</button>
+        <br>
+        <br>
 
 
 
